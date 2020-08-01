@@ -1,6 +1,5 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'java'
+apply plugin: 'application'
 
 group 'com.growphase'
 version '1.0-SNAPSHOT'
@@ -12,6 +11,9 @@ def protobufVersion = '1.19.0'
 def sl4jVersion = '1.7.25'
 def logbackVersion = '1.2.3'
 def commonConfigVersion = '2.4'
+
+def mainClass = 'com.sdqube.auth.AuthenticationMain'
+mainClassName = "$mainClass"
 
 repositories {
     mavenCentral()

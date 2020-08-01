@@ -21,12 +21,16 @@ public final class AuthenticationServiceImpl extends AuthenticationService {
 
     @Override
     AuthenticationPb.AuthBaseResponse authorize(AuthenticationPb.GAuthorization authorization, String permission, CommonsPb.Debug debug) {
+        // validate auth token with jwt
         return AuthenticationPb.AuthBaseResponse.newBuilder()
                 .setSuccess(true).build();
     }
 
     @Override
     AuthenticationPb.AuthBaseResponse login(AuthenticationPb.LoginRequest loginRequest, CommonsPb.Debug debug) {
+        // todo add login logic - redis, mongo
+        // token generate with jwt
+
         return AuthenticationPb.AuthBaseResponse.newBuilder()
                 .setLoginResponse(AuthenticationPb.LoginResponse.newBuilder()
                         .setAuthorization(AuthenticationPb.GAuthorization.newBuilder()

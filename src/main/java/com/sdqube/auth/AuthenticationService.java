@@ -25,6 +25,10 @@ public abstract class AuthenticationService extends GrpcServiceAbstract<Authenti
 
     @Override
     public AuthenticationPb.AuthBaseResponse error(CommonsPb.ErrorCode errorCode, String s) {
-        return null;
+        return AuthenticationPb.AuthBaseResponse.newBuilder()
+                .setMsg("Error in Authentication Service ")
+                .setError(true)
+                .setSuccess(false)
+                .build();
     }
 }
