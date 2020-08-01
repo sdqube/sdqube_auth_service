@@ -2,12 +2,11 @@ package com.sdqube.auth;
 
 import com.sdqube.entities.AuthenticationRpcGrpc;
 import com.sdqube.service.Bootstrap;
-import com.sdqube.service.Config;
-import com.sdqube.service.Injector;
 import com.sdqube.service.SDQubeMain;
 import com.sdqube.service.grpc.GrpcMain;
 import com.sdqube.service.grpc.GrpcServiceCall;
 import com.sdqube.service.logger.SDQubeLogger;
+import com.sdqube.service.servicecall.AuthenticationGrpcServiceCall;
 import com.sdqube.service.sql.SqlDataSource;
 import io.grpc.ServerBuilder;
 import io.grpc.ServerInterceptors;
@@ -38,9 +37,7 @@ public class AuthenticationMain extends GrpcMain {
 
     @Override
     public void configure() {
-        authServiceCall = Injector.instance(Config.getInstance()
-                .getString("service.call.authService",
-                        "com.sdqube.service.servicecall.AuthenticationGrpcServiceCall"));
+        authServiceCall = new AuthenticationGrpcServiceCall();
 
         SqlDataSource provSqlDataSource = new SqlDataSource(ProvisionDbConnection.getInstance());
         provRepo = new ProvisionRepo(provSqlDataSource);
