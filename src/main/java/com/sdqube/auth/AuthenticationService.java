@@ -1,6 +1,7 @@
 package com.sdqube.auth;
 
 import com.sdqube.entities.AuthenticationPb;
+import com.sdqube.entities.AuthenticationRpcGrpc;
 import com.sdqube.entities.CommonsPb;
 import com.sdqube.service.grpc.GrpcServiceAbstract;
 import com.sdqube.service.logger.SDQubeLogger;
@@ -16,8 +17,11 @@ public abstract class AuthenticationService extends GrpcServiceAbstract<Authenti
     public AuthenticationService() {
     }
 
-    abstract AuthenticationPb.AuthBaseResponse authorize(AuthenticationPb.GAuthorization authorization,
-                                                         String permission, CommonsPb.Debug debug);
+    public AuthenticationService(AuthenticationRpcGrpc.AuthenticationRpcBlockingStub authServiceCall) {
+        super(authServiceCall);
+    }
+
+    abstract AuthenticationPb.AuthBaseResponse authorize(AuthenticationPb.GAuthorization authorization, CommonsPb.Debug debug);
 
 
     abstract AuthenticationPb.AuthBaseResponse login(AuthenticationPb.LoginRequest loginRequest, CommonsPb.Debug debug);

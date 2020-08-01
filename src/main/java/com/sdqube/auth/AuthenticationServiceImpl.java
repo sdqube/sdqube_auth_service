@@ -1,6 +1,7 @@
 package com.sdqube.auth;
 
 import com.sdqube.entities.AuthenticationPb;
+import com.sdqube.entities.AuthenticationRpcGrpc;
 import com.sdqube.entities.CommonsPb;
 import com.sdqube.service.logger.SDQubeLogger;
 import com.sdqube.service.utils.SDQubeDate;
@@ -20,10 +21,16 @@ public final class AuthenticationServiceImpl extends AuthenticationService {
     }
 
     @Override
-    AuthenticationPb.AuthBaseResponse authorize(AuthenticationPb.GAuthorization authorization, String permission, CommonsPb.Debug debug) {
+    AuthenticationPb.AuthBaseResponse authorize(AuthenticationPb.GAuthorization authorization, CommonsPb.Debug debug) {
         // validate auth token with jwt
         return AuthenticationPb.AuthBaseResponse.newBuilder()
-                .setSuccess(true).build();
+                .setDebug(debug)
+                .setAuthResponse(AuthenticationPb.AuthResponse.newBuilder()
+                        .setGranted(true)
+                        .build())
+                .setError(false)
+                .setSuccess(true)
+                .build();
     }
 
     @Override

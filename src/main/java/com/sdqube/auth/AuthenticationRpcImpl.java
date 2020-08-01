@@ -19,7 +19,8 @@ public class AuthenticationRpcImpl extends AuthenticationRpcGrpc.AuthenticationR
 
     @Override
     public void authorize(AuthenticationPb.AuthBaseRequest request, StreamObserver<AuthenticationPb.AuthBaseResponse> responseObserver) {
-        super.authorize(request, responseObserver);
+        responseObserver.onNext(authenticationService.authorize(request.getAuthorization(), request.getDebug()));
+        responseObserver.onCompleted();
     }
 
     @Override
